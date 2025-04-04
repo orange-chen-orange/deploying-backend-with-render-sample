@@ -28,6 +28,16 @@ async function getRandomActivity() {
   }
 }
 
+app.get('/test_boredapi', async (req, res) => {
+  try {
+    const response = await fetch(BORED_API_BASE_URL + 'activity');
+    const data = await response.json();
+    res.json({ status: 'ok', data });
+  } catch (err) {
+    res.json({ status: 'fail', error: err.message });
+  }
+});
+
 app.get('/insert_activity', async (req, res) => {
   try {
     const client = await pool.connect();
